@@ -60,6 +60,7 @@ class LinkedList {
       value: value,
       next: null
     };
+
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
@@ -69,7 +70,12 @@ class LinkedList {
     this.tail = newNode;
   }
 
-  removeHead(value) {}
+  removeHead(value) {
+    let toBeRemoved = this.head;
+    this.head = toBeRemoved.next;
+
+    return toBeRemoved.value;
+  }
 }
 
 module.exports = {
