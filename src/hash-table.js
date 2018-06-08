@@ -5,7 +5,7 @@ const { LimitedArray, getIndexBelowMax, LinkedList } = require('./hash-table-hel
 class HashTable {
   constructor(limit = 8) {
     this.limit = limit;
-    this.storage = new LimitedArray(this.limit);
+    this.storage = new LinkedList();
     // Do not modify anything inside of the constructor
   }
 
@@ -37,6 +37,13 @@ class HashTable {
     if (this.capacityIsFull()) this.resize();
     const index = getIndexBelowMax(key.toString(), this.limit);
     let bucket = this.storage.get(index) || [];
+
+    // If no bucket, make new bucket
+    // Set index to new bucket
+    if (!bucket) {
+      bucket = new LinkedList();
+      this.storage[index] = bucket;
+    }
 
     bucket = bucket.filter(item => item[0] !== key);
     bucket.push([key, value]);
