@@ -8,9 +8,10 @@ class LimitedArray {
   }
 
   checkLimit(index) {
-    if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
+    if (typeof index !== "number")
+      throw new Error("The supplied index needs to be a number");
     if (this.limit <= index) {
-      throw new Error('The supplied index lies out of the array\'s bounds');
+      throw new Error("The supplied index lies out of the array's bounds");
     }
   }
 
@@ -49,7 +50,30 @@ const getIndexBelowMax = (str, max) => {
   return hash % max;
 };
 
+class LinkedList {
+  constructor() {
+    (this.head = null), (this.tail = null);
+  }
+
+  addToTail(value) {
+    const newNode = {
+      value: value,
+      next: null
+    };
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+      return;
+    }
+    this.tail.next = newNode;
+    this.tail = newNode;
+  }
+
+  removeHead(value) {}
+}
+
 module.exports = {
   LimitedArray,
   getIndexBelowMax,
+  LinkedList
 };
